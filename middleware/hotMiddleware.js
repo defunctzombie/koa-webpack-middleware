@@ -5,7 +5,7 @@ export default (compiler, opts) => {
   const expressMiddleware = hotMiddleware(compiler, opts)
   return async (ctx, next) => { // eslint-disable-line
     const stream = new PassThrough()
-    expressMiddleware(ctx.req, {
+    await expressMiddleware(ctx.req, {
       write: stream.write.bind(stream),
       writeHead: (state, headers) => {
         ctx.body = stream
