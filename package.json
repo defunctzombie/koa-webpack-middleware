@@ -11,7 +11,7 @@
     "hmr"
   ],
   "description": "webpack dev&amp;hot middleware for koa2",
-  "main": "lib/index.js",
+  "main": "middleware/index.js",
   "files": [
     "middleware",
     "lib"
