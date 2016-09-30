@@ -1,11 +1,11 @@
-import hotMiddleware from 'webpack-hot-middleware'
-import { PassThrough } from 'stream'
+const hotMiddleware = require('webpack-hot-middleware');
+const PassThrough = require('stream').PassThrough;
 
-export default (compiler, opts) => {
+module.exports = (compiler, opts) => {
   const expressMiddleware = hotMiddleware(compiler, opts)
-  return async (ctx, next) => { // eslint-disable-line
+  return function(ctx, next) {
     const stream = new PassThrough()
-    await expressMiddleware(ctx.req, {
+    return expressMiddleware(ctx.req, {
       write: stream.write.bind(stream),
       writeHead: (state, headers) => {
         ctx.body = stream
