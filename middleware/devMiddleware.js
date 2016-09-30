@@ -1,9 +1,9 @@
-import devMiddleware from 'webpack-dev-middleware'
+const devMiddleware = require('webpack-dev-middleware');
 
-export default (compiler, opts) => {
+module.exports = (compiler, opts) => {
   const expressMiddleware = devMiddleware(compiler, opts)
-  return async (ctx, next) => { // eslint-disable-line
-    await new Promise((resolve, reject) => {
+  return (ctx, next) => {
+    return new Promise((resolve, reject) => {
       const nextShim = function(err) {
         if (err) {
           reject(err)
